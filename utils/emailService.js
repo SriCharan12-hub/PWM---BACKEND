@@ -1,12 +1,14 @@
 import nodemailer from 'nodemailer';
 
 const sendEmail = async (options) => {
-  // Create a transporter
+  // Create a transporter with explicit Gmail SMTP settings
   const transporter = nodemailer.createTransport({
-    service: 'gmail', // You can change this to your email provider
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // Use TLS, not SSL
     auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      pass: process.env.EMAIL_PASS.trim(), // Trim any whitespace
     },
   });
 
